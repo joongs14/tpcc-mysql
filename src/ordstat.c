@@ -74,14 +74,14 @@ int ordstat( int t_num,
                 param[2].buffer_type = MYSQL_TYPE_STRING;
                 param[2].buffer = c_last;
                 param[2].buffer_length = strlen(c_last);
-                if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-                if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//              if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//              if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-                if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//              if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
                 memset(column, 0, sizeof(MYSQL_BIND) * 1); /* initialize */
                 column[0].buffer_type = MYSQL_TYPE_LONG;
                 column[0].buffer = &namecnt;
-                if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+/*              if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
                 switch( mysql_stmt_fetch(mysql_stmt) ) {
                     case 0: //SUCCESS
                         break;
@@ -92,7 +92,7 @@ int ordstat( int t_num,
                         goto sqlerr;
                 }
                 mysql_stmt_free_result(mysql_stmt);
-
+*/
 
 		proceed = 2;
 		/*EXEC_SQL DECLARE c_byname_o CURSOR FOR
@@ -114,10 +114,10 @@ int ordstat( int t_num,
                 param[2].buffer_type = MYSQL_TYPE_STRING;
                 param[2].buffer = c_last;
                 param[2].buffer_length = strlen(c_last);
-                if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-                if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//              if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//              if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-		if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//		if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
                 memset(column, 0, sizeof(MYSQL_BIND) * 4); /* initialize */
 		column[0].buffer_type = MYSQL_TYPE_FLOAT;
 		column[0].buffer = &c_balance;
@@ -130,7 +130,7 @@ int ordstat( int t_num,
 		column[3].buffer_type = MYSQL_TYPE_STRING;
 		column[3].buffer = c_last;
 		column[3].buffer_length = sizeof(c_last);
-		if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+//		if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 
 		if (namecnt % 2)
 			namecnt++;	/* Locate midpoint customer; */
@@ -139,7 +139,7 @@ int ordstat( int t_num,
 			proceed = 4;
 			/*EXEC_SQL FETCH c_byname_o
 			  INTO :c_balance, :c_first, :c_middle, :c_last;*/
-			switch( mysql_stmt_fetch(mysql_stmt) ) {
+/*			switch( mysql_stmt_fetch(mysql_stmt) ) {
 			    case 0: //SUCCESS
                             case MYSQL_DATA_TRUNCATED:
 				break;
@@ -148,11 +148,11 @@ int ordstat( int t_num,
 			    default:
 				mysql_stmt_free_result(mysql_stmt);
 				goto sqlerr;
-			}
+			}*/
 		}
 		proceed = 5;
 		/*EXEC_SQL CLOSE  c_byname_o;*/
-		mysql_stmt_free_result(mysql_stmt);
+//		mysql_stmt_free_result(mysql_stmt);
 
 
 	} else {		/* by number */
@@ -172,10 +172,10 @@ int ordstat( int t_num,
 		param[1].buffer = &c_d_id;
 		param[2].buffer_type = MYSQL_TYPE_LONG;
 		param[2].buffer = &c_id;
-		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-		if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//		if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
 		memset(column, 0, sizeof(MYSQL_BIND) * 4); /* initialize */
 		column[0].buffer_type = MYSQL_TYPE_FLOAT;
 		column[0].buffer = &c_balance;
@@ -188,7 +188,7 @@ int ordstat( int t_num,
 		column[3].buffer_type = MYSQL_TYPE_STRING;
 		column[3].buffer = c_last;
 		column[3].buffer_length = sizeof(c_last);
-		if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+/*		if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 		switch( mysql_stmt_fetch(mysql_stmt) ) {
 		    case 0: //SUCCESS
                     case MYSQL_DATA_TRUNCATED:
@@ -200,7 +200,7 @@ int ordstat( int t_num,
 			goto sqlerr;
 		}
 		mysql_stmt_free_result(mysql_stmt);
-
+*/
 	}
 
 	/* find the most recent order for this customer */
@@ -232,10 +232,10 @@ int ordstat( int t_num,
 	param[4].buffer = &c_d_id;
 	param[5].buffer_type = MYSQL_TYPE_LONG;
 	param[5].buffer = &c_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
 	memset(column, 0, sizeof(MYSQL_BIND) * 3); /* initialize */
 	column[0].buffer_type = MYSQL_TYPE_LONG;
         column[0].buffer = &o_id;
@@ -244,7 +244,7 @@ int ordstat( int t_num,
 	column[1].buffer_length = sizeof(o_entry_d);
 	column[2].buffer_type = MYSQL_TYPE_LONG;
         column[2].buffer = &o_carrier_id;
-	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+/*	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
         switch( mysql_stmt_fetch(mysql_stmt) ) {
             case 0: //SUCCESS
                 break;
@@ -255,7 +255,7 @@ int ordstat( int t_num,
                 goto sqlerr;
         }
         mysql_stmt_free_result(mysql_stmt);
-
+*/
 
 	/* find all the items in this order */
 	proceed = 8;
@@ -275,10 +275,10 @@ int ordstat( int t_num,
 	param[1].buffer = &c_d_id;
 	param[2].buffer_type = MYSQL_TYPE_LONG;
 	param[2].buffer = &o_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
         memset(column, 0, sizeof(MYSQL_BIND) * 5); /* initialize */	
 	column[0].buffer_type = MYSQL_TYPE_LONG;
         column[0].buffer = &ol_i_id;
@@ -291,19 +291,19 @@ int ordstat( int t_num,
 	column[4].buffer_type = MYSQL_TYPE_STRING;
         column[4].buffer = ol_delivery_d;
         column[4].buffer_length = sizeof(ol_delivery_d);
-	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+//	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 
 	/*proceed = 9;
 	EXEC_SQL OPEN c_items;
 
 	EXEC SQL WHENEVER NOT FOUND GOTO done;*/
 
-	for (;;) {
-		proceed = 10;
+//	for (;;) {
+//		proceed = 10;
 		/*EXEC_SQL FETCH c_items
 			INTO :ol_i_id, :ol_supply_w_id, :ol_quantity,
 			:ol_amount, :ol_delivery_d;*/
-		switch( mysql_stmt_fetch(mysql_stmt) ) {
+/*		switch( mysql_stmt_fetch(mysql_stmt) ) {
 		    case 0: //SUCCESS
 		    case MYSQL_DATA_TRUNCATED:
 			break;
@@ -314,8 +314,8 @@ int ordstat( int t_num,
 		    default:
 			mysql_stmt_free_result(mysql_stmt);
 			goto sqlerr;
-		}
-	}
+		}*/
+//	}
 
 done:
 	/*EXEC_SQL CLOSE c_items;*/

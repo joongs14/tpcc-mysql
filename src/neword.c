@@ -129,10 +129,10 @@ int neword( int t_num,
 	param[1].buffer = &d_id;
 	param[2].buffer_type = MYSQL_TYPE_LONG;
 	param[2].buffer = &c_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
 	memset(column, 0, sizeof(MYSQL_BIND) * 4); /* initialize */
 	column[0].buffer_type = MYSQL_TYPE_FLOAT;
 	column[0].buffer = &c_discount;
@@ -144,7 +144,7 @@ int neword( int t_num,
 	column[2].buffer_length = sizeof(c_credit);
 	column[3].buffer_type = MYSQL_TYPE_FLOAT;
 	column[3].buffer = &w_tax;
-	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+/*	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 	switch( mysql_stmt_fetch(mysql_stmt) ) {
 	    case 0: //SUCCESS
 	    case MYSQL_DATA_TRUNCATED:
@@ -156,7 +156,7 @@ int neword( int t_num,
 		goto sqlerr;
 	}
 	mysql_stmt_free_result(mysql_stmt);
-
+*/
 
 #ifdef DEBUG
 	printf("n %d\n",proceed);
@@ -175,16 +175,16 @@ int neword( int t_num,
 	param[0].buffer = &d_id;
 	param[1].buffer_type = MYSQL_TYPE_LONG;
 	param[1].buffer = &w_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
 	memset(column, 0, sizeof(MYSQL_BIND) * 2); /* initialize */
 	column[0].buffer_type = MYSQL_TYPE_LONG;
 	column[0].buffer = &d_next_o_id;
 	column[1].buffer_type = MYSQL_TYPE_FLOAT;
 	column[1].buffer = &d_tax;
-	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+/*	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 	switch( mysql_stmt_fetch(mysql_stmt) ) {
 	    case 0: //SUCCESS
 	    case MYSQL_DATA_TRUNCATED:
@@ -196,7 +196,7 @@ int neword( int t_num,
 		goto sqlerr;
 	}
 	mysql_stmt_free_result(mysql_stmt);
-
+*/
 
 	proceed = 3;
 	/*EXEC_SQL UPDATE district SET d_next_o_id = :d_next_o_id + 1
@@ -211,8 +211,8 @@ int neword( int t_num,
 	param[1].buffer = &d_id;
 	param[2].buffer_type = MYSQL_TYPE_LONG;
 	param[2].buffer = &w_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
 	o_id = d_next_o_id;
 
@@ -244,8 +244,8 @@ int neword( int t_num,
 	param[5].buffer = &o_ol_cnt;
 	param[6].buffer_type = MYSQL_TYPE_LONG;
 	param[6].buffer = &o_all_local;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
 
 #ifdef DEBUG
@@ -264,8 +264,8 @@ int neword( int t_num,
 	param[1].buffer = &d_id;
 	param[2].buffer_type = MYSQL_TYPE_LONG;
 	param[2].buffer = &w_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
 	/* sort orders to avoid DeadLock */
 	for (i = 0; i < o_ol_cnt; i++) {
@@ -317,6 +317,7 @@ int neword( int t_num,
 		column[2].buffer_type = MYSQL_TYPE_STRING;
 		column[2].buffer = i_data;
 		column[2].buffer_length = sizeof(i_data);
+
 		if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 		switch( mysql_stmt_fetch(mysql_stmt) ) {
 		    case 0: //SUCCESS
@@ -333,7 +334,6 @@ int neword( int t_num,
 			goto sqlerr;
 		}
 		mysql_stmt_free_result(mysql_stmt);
-
 
 		price[ol_num_seq[ol_number - 1]] = i_price;
 		strncpy(iname[ol_num_seq[ol_number - 1]], i_name, 25);
@@ -362,10 +362,10 @@ int neword( int t_num,
 		param[0].buffer = &ol_i_id;
 		param[1].buffer_type = MYSQL_TYPE_LONG;
 		param[1].buffer = &ol_supply_w_id;
-		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-		if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//		if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
 		memset(column, 0, sizeof(MYSQL_BIND) * 12); /* initialize */
 		column[0].buffer_type = MYSQL_TYPE_LONG;
 		column[0].buffer = &s_quantity;
@@ -402,7 +402,7 @@ int neword( int t_num,
 		column[11].buffer_type = MYSQL_TYPE_STRING;
 		column[11].buffer = s_dist_10;
 		column[11].buffer_length = sizeof(s_dist_10);
-		if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+/*		if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 		switch( mysql_stmt_fetch(mysql_stmt) ) {
 		    case 0: //SUCCESS
 			break;
@@ -413,7 +413,7 @@ int neword( int t_num,
 			goto sqlerr;
 		}
 		mysql_stmt_free_result(mysql_stmt);
-
+*/
 
 		pick_dist_info(ol_dist_info, d_id);	/* pick correct
 							 * s_dist_xx */
@@ -448,8 +448,8 @@ int neword( int t_num,
 		param[1].buffer = &ol_i_id;
 		param[2].buffer_type = MYSQL_TYPE_LONG;
 		param[2].buffer = &ol_supply_w_id;
-		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
 
 		ol_amount = ol_quantity * i_price * (1 + w_tax + d_tax) * (1 - c_discount);
@@ -490,8 +490,8 @@ int neword( int t_num,
 		param[8].buffer_type = MYSQL_TYPE_STRING;
 		param[8].buffer = ol_dist_info;
 		param[8].buffer_length = strlen(ol_dist_info);
-		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//		if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//		if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
 
 	}			/* End Order Lines */

@@ -57,14 +57,14 @@ int slev( int t_num,
 	param[0].buffer = &d_id;
 	param[1].buffer_type = MYSQL_TYPE_LONG;
 	param[1].buffer = &w_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
 	memset(column, 0, sizeof(MYSQL_BIND) * 1); /* initialize */
 	column[0].buffer_type = MYSQL_TYPE_LONG;
 	column[0].buffer = &d_next_o_id;
-	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+/*	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 	switch( mysql_stmt_fetch(mysql_stmt) ) {
 	    case 0: //SUCCESS
 		break;
@@ -75,7 +75,7 @@ int slev( int t_num,
 		goto sqlerr;
 	}
 	mysql_stmt_free_result(mysql_stmt);
-
+*/
 	/* find the most recent 20 orders for this district */
 	/*EXEC_SQL DECLARE ord_line CURSOR FOR
 	                SELECT DISTINCT ol_i_id
@@ -99,21 +99,21 @@ int slev( int t_num,
 	param[2].buffer = &d_next_o_id;
 	param[3].buffer_type = MYSQL_TYPE_LONG;
 	param[3].buffer = &d_next_o_id;
-	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
-	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_bind_param(mysql_stmt, param) ) goto sqlerr;
+//	if( mysql_stmt_execute(mysql_stmt) ) goto sqlerr;
 
-	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
+//	if( mysql_stmt_store_result(mysql_stmt) ) goto sqlerr;
 	memset(column, 0, sizeof(MYSQL_BIND) * 1); /* initialize */
 	column[0].buffer_type = MYSQL_TYPE_LONG;
 	column[0].buffer = &ol_i_id;
-	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
+//	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
 
-	for (;;) {
+//	for (;;) {
 #ifdef DEBUG
 		printf("fetch 1\n");
 #endif
 		/*EXEC_SQL FETCH ord_line INTO :ol_i_id;*/
-		switch( mysql_stmt_fetch(mysql_stmt) ) {
+/*		switch( mysql_stmt_fetch(mysql_stmt) ) {
                     case 0: //SUCCESS
                         break;
                     case MYSQL_NO_DATA: //NO MORE DATA
@@ -124,7 +124,7 @@ int slev( int t_num,
                         mysql_stmt_free_result(mysql_stmt);
                         goto sqlerr;
                 }
-
+*/
 #ifdef DEBUG
 		printf("select 2\n");
 #endif
@@ -143,14 +143,14 @@ int slev( int t_num,
 		param2[1].buffer = &ol_i_id;
 		param2[2].buffer_type = MYSQL_TYPE_LONG;
 		param2[2].buffer = &level;
-		if( mysql_stmt_bind_param(mysql_stmt2, param2) ) goto sqlerr2;
-		if( mysql_stmt_execute(mysql_stmt2) ) goto sqlerr2;
+//		if( mysql_stmt_bind_param(mysql_stmt2, param2) ) goto sqlerr2;
+//		if( mysql_stmt_execute(mysql_stmt2) ) goto sqlerr2;
 
-		if( mysql_stmt_store_result(mysql_stmt2) ) goto sqlerr2;
+//		if( mysql_stmt_store_result(mysql_stmt2) ) goto sqlerr2;
 		memset(column2, 0, sizeof(MYSQL_BIND) * 1); /* initialize */
 		column2[0].buffer_type = MYSQL_TYPE_LONG;
 		column2[0].buffer = &i_count;
-		if( mysql_stmt_bind_result(mysql_stmt2, column2) ) goto sqlerr2;
+/*		if( mysql_stmt_bind_result(mysql_stmt2, column2) ) goto sqlerr2;
 		switch( mysql_stmt_fetch(mysql_stmt2) ) {
 		    case 0: //SUCCESS
 			break;
@@ -161,8 +161,8 @@ int slev( int t_num,
 			goto sqlerr2;
 		}
 		mysql_stmt_free_result(mysql_stmt2);
-
-	}
+*/
+//	}
 
 done:
 	/*EXEC_SQL CLOSE ord_line;*/
